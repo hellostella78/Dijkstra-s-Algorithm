@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
 	A = (pNODE*)calloc(n + 1, sizeof(pNODE));
 	if (!A) {
 		printf("Error: calloc failure.\n");
-		exit(1);
+		exit(0);
 	}
 
 	//read in the edges and construct adjacency list
@@ -62,13 +62,13 @@ int main(int argc, char* argv[]) {
 		v_fscanf = fscanf(ifile, "%d%d%d%f", &edge_id, &u, &v, &w);
 		if (v_fscanf < 4) {
 			printf("Error: fscanf returns %d.\n", v_fscanf);
-			exit(1);
+			exit(0);
 		}
 
 		node = (pNODE)malloc(sizeof(NODE));
 		if(!node) {
 			printf("Error: malloc failure.\n");
-			exit(1);
+			exit(0);
 		}
 
 		node->u = u;
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 			node = (pNODE)malloc(sizeof(NODE));
 			if (!node) {
 				printf("Error: malloc failure.\n");
-				exit(1);
+				exit(0);
 			}
 			node->u = v;
 			node->v = u;
