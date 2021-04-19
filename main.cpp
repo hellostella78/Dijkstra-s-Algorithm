@@ -12,7 +12,7 @@
 
 int main(int argc, char* argv[]) {
 	FILE* ifile;
-	VERTEX* V;
+	//VERTEX* V;
 	pNODE* A;
 	pNODE node;
 	
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	//open network file for reading
-	ifile = fopen("network01.txt", "r"); //argv[1],"r" CHANGE TO THIS
+	ifile = fopen(argv[1], "r"); //argv[1],"r" CHANGE TO THIS
 	if (!ifile) {
 		printf("ErrorGLX1:cannot open file for reading.\n");
 	}
@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
 	v_fscanf = fscanf(ifile, "%d%d", &n, &m);
 	if (v_fscanf < 2) {
 		printf("ErrorGLX2: fscanf returns %d. \n", v_fscanf);
-		exit(1);
+		exit(0); // exit(1)
 	}
 
 	//allocate memory for adjacency lists
@@ -106,19 +106,19 @@ int main(int argc, char* argv[]) {
 	//end checking the adjacency lists
 	fclose(ifile);
 
-	source = 0;
+	/*source = 0;
 	destination = 0;
 	V = (VERTEX*)calloc(n + 1, sizeof(VERTEX));
 	if (!V) {
 		printf("Error: calloc failure.\n");
 		exit(1);
-	}
+	}*/
 
 	//begin query part...
 	while (1) {
 		r_value = nextWord(word);
 		if (!r_value) {
-			//pirntf("ErrorGLX: EOF\n");
+			printf("ErrorGLX: EOF\n");
 			continue;
 		}
 
@@ -132,7 +132,7 @@ int main(int argc, char* argv[]) {
 			//find
 			v_scanf = scanf("%d%d%d", &source_new, &destination_new, &flag_new);
 			if (v_scanf != 3) {
-				//printf("ErrorGLX3: wrong return value for scanf\n");
+				printf("ErrorGLX3: wrong return value for scanf\n");
 				continue;
 			}
 			else {
@@ -146,21 +146,21 @@ int main(int argc, char* argv[]) {
 					destination = destination_new;
 					flag = flag_new;
 					pVERTEX V = dijkstra(n, A, source, destination, flag);
-			
+					delete V;
 				}
 			}
 		}
 		else if (0 == strcmp(word, "write")) {
 			r_value = nextWord(word2);
 			if (!r_value) {
-				//printf("ErrorGLX4: EOF\n");
+				printf("ErrorGLX4: EOF\n");
 				continue;
 			}
 
 			if (0 == strcmp(word2, "path")) {
 				v_scanf = scanf("%d%d", &s_new, &t_new);
 				if (v_scanf != 2) {
-					//printf("ErrorcwGLX5: wrong return value for scanf\n");
+					printf("ErrorcwGLX5: wrong return value for scanf\n");
 					continue;
 				}
 				else {
@@ -180,9 +180,10 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		else {
-			//printf("ErrorGLX: Bad input\n");
+			printf("ErrorGLX: Bad input\n");
 			continue;
 		}
 	}
-	
+	delete A;
+	exit(0);
 }
