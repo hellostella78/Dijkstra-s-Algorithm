@@ -25,8 +25,8 @@ int main(int argc, char* argv[]) {
 
 	int v_scanf, v_fscanf;
 	int r_value;
-	directed_graph = 1;//NEED TO DELETE AND UNCOMMENT THE BELOW
-	/*if (argc != 3) {
+	//directed_graph = 1;//NEED TO DELETE AND UNCOMMENT THE BELOW
+	if (argc != 3) {
 		printf("Command Format: %s <graph_file> <direction>\n", argv[0]);
 		exit(1);
 	}
@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 	}
 	if (0 == strcmp(argv[2], "undirected\0")) {
 		directed_graph = 0;
-	}*/
+	}
 
 	//open network file for reading
 	ifile = fopen("network01.txt", "r"); //argv[1],"r" CHANGE TO THIS
