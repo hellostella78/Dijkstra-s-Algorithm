@@ -10,21 +10,17 @@
 pVERTEX V;
 
 
-
 //n=total number of nodes, A = array of nodes, s=source vetex, t=distance
 pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag) {
-	//something missing part
-	pVERTEX V = (pVERTEX)calloc(n + 1, sizeof(VERTEX)); //final product written in here
+	
+    V = (pVERTEX)calloc(n + 1, sizeof(VERTEX)); //final product written in here
 	HEAP* heap =  heapInit(n);
 	pNODE node;
 	pELEMENT element;
-	int v, pos; 
-	float w; //weight = w should be float ?
-	int u;
+	int v, pos, u; 
+	float w; //weight = w should be float 
 
-	//Initialize
-	heapInit(n);
-
+	//Initialize of dijkstra
 	for (int i = 1; i <= n; i++) {
 		V[i].color = 0;
 		V[i].pi = NULL;
@@ -48,7 +44,7 @@ pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag) {
 
 		if (u == t) {
 			heapFree(heap);
-			break;
+			return V;
 		}
 
 
@@ -63,7 +59,7 @@ pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag) {
 				V[v].color = 1;
 				//printf("V[%d].color to 1\n", v);
 				V[v].pos = heap->size + 1;
-				element = (ELEMENT*)malloc(sizeof(ELEMENT));
+				element = (pELEMENT)malloc(sizeof(ELEMENT));
 				element->vertex = v;
 				element->key = V[v].dist;
 				//Insert(heap, element);
@@ -99,14 +95,15 @@ pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag) {
 			printf("V[%7d].pos=%d\n", v, V[v].pos);
 		}
 	}*/
-
-	return 0;
+	heapFree(heap);
+	return V;
 }
 
 int printPath(int n, pNODE* A, int source, int destination, int s, int t, int flag) {
 	pVERTEX V = dijkstra(n, A, source, destination, 0);
-	int* path = new int[n];
-	int count, j = 0;
+	/*int* path = new int[n];
+	int count = 0;
+	int j = 0;*/
 
 	if (V[t].color == 0) {
 		if (destination < 1 || destination > n || t == destination) {
@@ -118,7 +115,9 @@ int printPath(int n, pNODE* A, int source, int destination, int s, int t, int fl
 			return 0;
 		}
 	}
-
+	int* path = new int[n];
+	int count = 0;
+	int j = 0;
 	path[0] = t;
 	count++;
 	int v = t;
@@ -135,7 +134,7 @@ int printPath(int n, pNODE* A, int source, int destination, int s, int t, int fl
 		else {
 			if (v == t) {
 				printf("No %d-%d path exists.\n", s, t);
-				return 0;
+				
 			}
 			else {
 				printf("No %d-%d has been computed.\n", s, t);
