@@ -41,5 +41,5 @@ A[i] is the adjacency list of vertex i
 //int dijkstra(int n, pNODE* A, int s, int t, int f_i, int f_d, int f_u, int f_p);
 pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag);
 
-				
+int printPath(int n, pNODE* A, int source, int deestination, int s, int t, int flag);
 #endif

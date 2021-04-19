@@ -102,3 +102,64 @@ pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag) {
 
 	return 0;
 }
+
+int printPath(int n, pNODE* A, int source, int destination, int s, int t, int flag) {
+	pVERTEX V = dijkstra(n, A, source, destination, 0);
+	int* path = new int[n];
+	int count, j = 0;
+
+	if (V[t].color == 0) {
+		if (destination < 1 || destination > n || t == destination) {
+			printf("No %d-%d path exists.\n", s, t);
+			return 0;
+		}
+		else {
+			printf("No %d-%d path has been computed.\n", s, t);
+			return 0;
+		}
+	}
+
+	path[0] = t;
+	count++;
+	int v = t;
+
+	while (v != s) {
+		if (V[v].color != 0) {
+			if (V[v].color != 2) {
+				j = 1;
+			}
+			v = V[v].pi;
+			path[count] = v;
+			count++;
+		}
+		else {
+			if (v == t) {
+				printf("No %d-%d path exists.\n", s, t);
+				return 0;
+			}
+			else {
+				printf("No %d-%d has been computed.\n", s, t);
+				return 0;
+			}
+		}
+		if (V[v].color != 2) {
+			j = 1;
+		}
+	}
+	if (j == 0) {
+		printf("Shortest path: <");
+	}
+	else {
+		printf("Path not known to be shortest: <");
+	}
+
+	for (int i = count - 1; i > 0; i--) {
+		printf("%d, ", path[i]);
+	}
+	printf("%d>\n", path[0]);
+	printf("The path weight is: %12.4f\n", V[t].dist);
+
+	delete V;
+
+	return 1;
+}
