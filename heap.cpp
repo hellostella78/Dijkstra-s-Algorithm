@@ -27,7 +27,7 @@ int HeapInsert(HEAP* heap, pELEMENT item, pVERTEX V, int flag) {
 	heap->H[heap->size] = item;
 	heap->H[heap->size]->pos = heap->size;
 
-	MovingUp(heap, heap->size, V);
+	MovingUp(heap, heap->H[heap->size]->pos, V);
 
 	if (flag == 1) {
 		printf("Insert vertex %d, key=%12.4f\n", item->vertex, V[item->vertex].dist);
@@ -66,7 +66,6 @@ int DecreaseKey(HEAP* heap, int pos, float newkey, pVERTEX V, int flag) {
 void MovingUp(HEAP* heap, int pos, pVERTEX V) {
 	pELEMENT temp;
 	int parent;
-	//pVERTEX V;
 
 	parent = pos / 2;
 	if (pos > 1 && heap->H[pos]->key < heap->H[parent]->key) {
@@ -200,6 +199,7 @@ void minHeapify(HEAP* H, int i, int flag) {
 		float temp = (H->H[i])->key;
 		(H->H[i])->key = (H->H[smallest])->key;
 		(H->H[smallest])->key = temp;
+
 		minHeapify(H, smallest, flag);
 	}
 }

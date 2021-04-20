@@ -30,7 +30,7 @@ typedef struct TAG_NODE {
 	TAG_NODE* next; /*pointer to next node*/
 }NODE;
 
-typedef NODE* pNODE; //graph
+typedef NODE* pNODE; 
 
 /*
 A[1], A[2],...,A[n] form an array of n pointers of type pNODE
