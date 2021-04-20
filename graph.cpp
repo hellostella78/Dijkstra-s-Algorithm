@@ -34,7 +34,12 @@ pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag) {
 	while (heap->size != 0) {
 
 		//u = ExtractMin(heap);
-		u = DeleteMin(heap, V, flag)->vertex;
+		//u = DeleteMin(heap, V, flag)->vertex;
+		
+		element = DeleteMin(heap, V, flag);
+		u = element->vertex;
+		free(element);
+
 		V[u].color = 2;
 
 		if (u == t) {

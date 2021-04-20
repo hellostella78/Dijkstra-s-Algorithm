@@ -11,21 +11,22 @@
 using namespace std;
 //int numberofminheapifycalled = 0;
 
-void heapFree(HEAP* heap) {
+void heapFree(HEAP* heap) { //함
 	free(heap->H);
 	free(heap);
 }
 
-int HeapInsert(HEAP* heap, pELEMENT item, pVERTEX V, int flag) {
+int HeapInsert(HEAP* heap, pELEMENT item, pVERTEX V, int flag) {//함
 	if (heap->size >= heap->capacity) {
 		printf("Error in HeapInsert: Heap full...\n");
 		return 1;
 	}
 	heap->size++;
-	heap->H[heap->size] = item;
-	heap->H[heap->size]->pos = heap->size;
+	int heapsize = heap->size;
+	heap->H[heapsize] = item;
+	heap->H[heapsize]->pos = heap->size;
 
-	MovingUp(heap, heap->H[heap->size]->pos, V);
+	MovingUp(heap, heap->H[heapsize]->pos, V);
 
 	if (flag == 1) {
 		printf("Insert vertex %d, key=%12.4f\n", item->vertex, item->key);
@@ -44,10 +45,10 @@ int HeapInsert(HEAP* heap, pELEMENT item, pVERTEX V, int flag) {
 //}
 
 int DecreaseKey(HEAP* heap, int pos, float newkey, pVERTEX V, int flag) {
-	
+	//함
 
 	if (pos < 1 || pos > heap->size || newkey >= heap->H[pos]->key) {
-		printf("Error in DecreaseKey\n");
+		//printf("Error in DecreaseKey\n");
 		return 1;
 	}
 	if (flag == 1) {
@@ -61,7 +62,7 @@ int DecreaseKey(HEAP* heap, int pos, float newkey, pVERTEX V, int flag) {
 	return 0;
 }
 
-void MovingUp(HEAP* heap, int pos, pVERTEX V) {
+void MovingUp(HEAP* heap, int pos, pVERTEX V) {//함
 
 	pELEMENT temp;
 	int p = parent(pos);//int parent; parent = pos/2;
@@ -84,7 +85,7 @@ void MovingUp(HEAP* heap, int pos, pVERTEX V) {
 //	// == MinHeapify
 //}
 
-pELEMENT DeleteMin(HEAP* heap, pVERTEX V, int flag) {
+pELEMENT DeleteMin(HEAP* heap, pVERTEX V, int flag) {//함
 	pELEMENT min, last;
 	
 	if (heap->size <= 0) {
@@ -106,7 +107,7 @@ pELEMENT DeleteMin(HEAP* heap, pVERTEX V, int flag) {
 	return min;
 }
 
-HEAP* heapInit(int capacity) {
+HEAP* heapInit(int capacity) {//함
 
 	HEAP* heap;
 	heap = (HEAP*)calloc(1, sizeof(HEAP));
@@ -118,7 +119,7 @@ HEAP* heapInit(int capacity) {
 	return heap;
 }
 // print the elements 
-void heapPrint(HEAP* H) {
+void heapPrint(HEAP* H) {//함
 
 	printf("capacity=%d, size=%d\n", H->capacity, H->size);
 
@@ -134,22 +135,22 @@ void heapPrint(HEAP* H) {
 	}
 }
 
-void WriteHeap(HEAP* H) {
-	FILE* ofile;
-
-	ofile = fopen("HEAPoutput.txt", "w");
-	if (!ofile) {
-		printf("Error: cannot open file for writing\n");
-	}
-	else {
-		fprintf(ofile, "%d\n", H->size);
-	}
-
-	for (int j = 1; j <= H->size; j++) {
-		fprintf(ofile, "%f\n", H->H[j]->key);
-	}
-	fclose(ofile);
-}
+//void WriteHeap(HEAP* H) {
+//	FILE* ofile;
+//
+//	ofile = fopen("HEAPoutput.txt", "w");
+//	if (!ofile) {
+//		printf("Error: cannot open file for writing\n");
+//	}
+//	else {
+//		fprintf(ofile, "%d\n", H->size);
+//	}
+//
+//	for (int j = 1; j <= H->size; j++) {
+//		fprintf(ofile, "%f\n", H->H[j]->key);
+//	}
+//	fclose(ofile);
+//}
 
 //changed from float to int
 //float ExtractMin(HEAP* H) {
@@ -179,8 +180,10 @@ void WriteHeap(HEAP* H) {
 //	}
 //}
 
-void minHeapify(HEAP* H, int i, int flag) {
-	int l = left(i), r = right(i), smallest; //these are all indices
+void minHeapify(HEAP* H, int i, int flag) {//함
+	int l = left(i);
+	int r = right(i);
+	int smallest; //these are all indices
 	//numberofminheapifycalled++;
 
 	if (l <= H->size && (H->H[l])->key < (H->H[i])->key) {
@@ -195,18 +198,21 @@ void minHeapify(HEAP* H, int i, int flag) {
 
 	if (smallest != i) {
 		float temp = (H->H[i])->key;
+		int tempvertex = (H->H[i])->vertex;
 		(H->H[i])->key = (H->H[smallest])->key;
+		(H->H[i])->vertex = (H->H[smallest])->vertex;
 		(H->H[smallest])->key = temp;
+		(H->H[smallest])->vertex = tempvertex;
 
 		minHeapify(H, smallest, flag);
 	}
 }
 
-//void BuildHeap(HEAP* H) {
-//	for (int i = (H->size) / 2; i >= 1; i--) {
-//		minHeapify(H, i);
-//	}
-//}
+void BuildHeap(HEAP* H, int flag) {//함
+	for (int i = (H->size) / 2; i >= 1; i--) {
+		minHeapify(H, i, flag);
+	}
+}
 
 int parent(int i) {
 	return i / 2;
