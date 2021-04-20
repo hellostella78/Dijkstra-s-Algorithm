@@ -1,11 +1,10 @@
-#pragma once
-#pragma warning (disable:4996)
+//#pragma once
+//#pragma warning (disable:4996)
 #include<string.h>
 #include<stdio.h>
 #include "util.h"
-#include "graph.h"
-#include "heap.h" 
 
+using namespace std;
 
 int nextWord(char* word) {
 	char c;

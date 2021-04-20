@@ -1,13 +1,16 @@
-#pragma once
-#pragma warning (disable:4996)
+//#pragma once
+//#pragma warning (disable:4996)
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include <iostream>
+#include <fstream>
 #include "main.h"
 #include "graph.h"
 #include "util.h"
 #include "heap.h"
 
+using namespace std;
 //VERTEX* V; 
 
 int main(int argc, char* argv[]) {
@@ -54,12 +57,13 @@ int main(int argc, char* argv[]) {
 	A = (pNODE*)calloc(n + 1, sizeof(pNODE));
 	if (!A) {
 		printf("Error: calloc failure.\n");
+		delete A;
 		exit(0);
 	}
 
 	//read in the edges and construct adjacency list
 	for (i = 1; i <= m; i++) {
-		v_fscanf = fscanf(ifile, "%d%d%d%f", &edge_id, &u, &v, &w);
+		v_fscanf = fscanf(ifile, "%d %d %d %f", &edge_id, &u, &v, &w);
 		if (v_fscanf < 4) {
 			printf("Error: fscanf returns %d.\n", v_fscanf);
 			exit(0);
@@ -179,10 +183,10 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		}
-		else {
+		/*else {
 			printf("ErrorGLX: Bad input\n");
 			continue;
-		}
+		}*/
 	}
 	delete A;
 	exit(0);

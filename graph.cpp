@@ -1,41 +1,35 @@
-#pragma once
-#pragma warning (disable:4996)
+//#pragma once
+//#pragma warning (disable:4996)
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "graph.h"
 #include "heap.h" 
-#include "util.h"
 
 pVERTEX V;
 
 
 //n=total number of nodes, A = array of nodes, s=source vetex, t=distance
 pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag) {
-	
-    V = (pVERTEX)calloc(n + 1, sizeof(VERTEX)); //final product written in here
-	HEAP* heap =  heapInit(n);
 	pNODE node;
 	pELEMENT element;
-	int v, pos, u; 
+	int v, pos, u;
 	float w; //weight = w should be float 
+	
+    V = (pVERTEX)calloc(n + 1, sizeof(VERTEX)); //final product written in here
+	HEAP* heap = heapInit(n);
+	pELEMENT source = (pELEMENT)malloc(sizeof(ELEMENT));
 
 	//Initialize of dijkstra
 	for (int i = 1; i <= n; i++) {
 		V[i].color = 0;
 		V[i].pi = NULL;
 	}
-
 	V[s].dist = 0;
 	V[s].color = 1;
 
-	pELEMENT source = (pELEMENT)calloc(1, sizeof(ELEMENT));
 	source->vertex = s;
 	source->key = V[s].dist;
 
 	HeapInsert(heap, source, V, flag);
-
-	//Dijkstra
 	while (heap->size != 0) {
 
 		//u = ExtractMin(heap);
@@ -157,7 +151,6 @@ int printPath(int n, pNODE* A, int source, int destination, int s, int t, int fl
 	}
 	printf("%d>\n", path[0]);
 	printf("The path weight is: %12.4f\n", V[t].dist);
-
 	delete V;
 
 	return 1;

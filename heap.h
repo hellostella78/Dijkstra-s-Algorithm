@@ -1,5 +1,5 @@
-#pragma once
-#pragma warning (disable:4996)
+//#pragma once
+//#pragma warning (disable:4996)
 #include <stdio.h>
 #include "graph.h"
 
@@ -38,7 +38,7 @@ void WriteHeap(HEAP* heap);
 
 //void Insert(HEAP* heap, ELEMENT* element);
 
-float ExtractMin(HEAP* heap);
+//float ExtractMin(HEAP* heap);
 
 //void DecreaseKey(HEAP* heap, int i, int value);
 

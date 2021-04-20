@@ -1,5 +1,5 @@
-#pragma once
-#pragma warning (disable:4996)
+//#pragma once
+//#pragma warning (disable:4996)
 #ifndef _graph_h
 #define _graph_h 1
 

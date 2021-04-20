@@ -4,11 +4,9 @@
 #include <limits.h>
 #include <iostream>
 #include "graph.h"
-#include "heap.h" 
-#include "util.h"
 
 //heap.cpp implements the heap data structure
-#pragma warning(disable : 4996)
+//#pragma warning(disable : 4996)
 //Initialize(n) where n is capacity
 using namespace std;
 int numberofminheapifycalled = 0;
