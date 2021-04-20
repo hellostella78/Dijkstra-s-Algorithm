@@ -1,8 +1,9 @@
-//#pragma once
-//#pragma warning (disable:4996)
+#pragma once
+#pragma warning (disable:4996)
 #include <stdio.h>
 #include <stdlib.h>
 #include "heap.h" 
+#include "graph.h"
 
 pVERTEX V;
 
@@ -16,7 +17,6 @@ pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag) {
 	
     V = (pVERTEX)calloc(n + 1, sizeof(VERTEX)); //final product written in here
 	HEAP* heap = heapInit(n);
-	pELEMENT source = (pELEMENT)malloc(sizeof(ELEMENT));
 
 	//Initialize of dijkstra
 	for (int i = 1; i <= n; i++) {
@@ -26,6 +26,7 @@ pVERTEX dijkstra(int n, pNODE* A, int s, int t, int flag) {
 	V[s].dist = 0;
 	V[s].color = 1;
 
+	pELEMENT source = (pELEMENT)malloc(sizeof(ELEMENT));
 	source->vertex = s;
 	source->key = V[s].dist;
 

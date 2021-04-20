@@ -3,6 +3,7 @@
 #ifndef _util_h
 #define _util_h 1
 #include <stdio.h>
+using namespace std;
 
 int nextWord(char* word);
 

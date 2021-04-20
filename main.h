@@ -1,3 +1,3 @@
-//#pragma once
-//#pragma warning (disable:4996)
-int main(int argc, char* argv[]);
+#pragma once
+#pragma warning (disable:4996)
+class main{};

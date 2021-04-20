@@ -6,10 +6,10 @@
 #include "graph.h"
 
 //heap.cpp implements the heap data structure
-//#pragma warning(disable : 4996)
+#pragma warning(disable : 4996)
 //Initialize(n) where n is capacity
 using namespace std;
-int numberofminheapifycalled = 0;
+//int numberofminheapifycalled = 0;
 
 void heapFree(HEAP* heap) {
 	free(heap->H);
@@ -28,7 +28,7 @@ int HeapInsert(HEAP* heap, pELEMENT item, pVERTEX V, int flag) {
 	MovingUp(heap, heap->H[heap->size]->pos, V);
 
 	if (flag == 1) {
-		printf("Insert vertex %d, key=%12.4f\n", item->vertex, V[item->vertex].dist);
+		printf("Insert vertex %d, key=%12.4f\n", item->vertex, item->key);
 	}
 
 	return 0;
@@ -62,27 +62,27 @@ int DecreaseKey(HEAP* heap, int pos, float newkey, pVERTEX V, int flag) {
 }
 
 void MovingUp(HEAP* heap, int pos, pVERTEX V) {
-	pELEMENT temp;
-	int parent;
 
-	parent = pos / 2;
-	if (pos > 1 && heap->H[pos]->key < heap->H[parent]->key) {
+	pELEMENT temp;
+	int p = parent(pos);//int parent; parent = pos/2;
+
+	if (pos > 1 && heap->H[pos]->key < heap->H[p]->key) {
 		temp = heap->H[pos];
-		heap->H[pos] = heap->H[parent];
-		heap->H[parent] = temp;
+		heap->H[pos] = heap->H[p];
+		heap->H[p] = temp;
 
 		/*heap->H[pos]->pos = pos;
 		heap->H[parent]->pos = parent;*/
 		V[heap->H[pos]->vertex].pos = pos;
-		V[heap->H[parent]->vertex].pos = parent;
+		V[heap->H[p]->vertex].pos = p;
 
-		MovingUp(heap, parent, V);
+		MovingUp(heap, p, V);
 	}
 }
 
-void MovingDown(HEAP* heap, int pos, int* flag, int* count_Heapify) {
-	// == MinHeapify
-}
+//void MovingDown(HEAP* heap, int pos, int* flag, int* count_Heapify) {
+//	// == MinHeapify
+//}
 
 pELEMENT DeleteMin(HEAP* heap, pVERTEX V, int flag) {
 	pELEMENT min, last;
@@ -181,7 +181,7 @@ void WriteHeap(HEAP* H) {
 
 void minHeapify(HEAP* H, int i, int flag) {
 	int l = left(i), r = right(i), smallest; //these are all indices
-	numberofminheapifycalled++;
+	//numberofminheapifycalled++;
 
 	if (l <= H->size && (H->H[l])->key < (H->H[i])->key) {
 		smallest = l;

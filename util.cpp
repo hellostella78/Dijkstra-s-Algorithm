@@ -1,6 +1,10 @@
-//#pragma once
-//#pragma warning (disable:4996)
+#pragma once
+#pragma warning (disable:4996)
 #include<string.h>
+#include <stdlib.h>
+#include <iostream>
+#include <fstream>
+#include <string>
 #include<stdio.h>
 #include "util.h"
 
@@ -17,18 +21,16 @@ int nextWord(char* word) {
 	}
 
 	i = 0;
-	while (c != EOF) {
+	while (c != EOF) {  
 		if (c == ' ' || c == '\t' || c == '\n') {
 			break;
 		}
-		r_value = 1;
-		word[i] = c;
+		r_value = 1; 
+		word[i] = c; 
 		i++;
-		c = getchar();
+		c = getchar(); 
 	}
 	word[i] = '\0';
-
-	//printf("END nextWord\n");
-	//r_value=1 for successful reading, 0 for unsuccessful reading
+	
 	return r_value;
 }

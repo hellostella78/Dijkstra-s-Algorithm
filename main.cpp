@@ -1,5 +1,5 @@
-//#pragma once
-//#pragma warning (disable:4996)
+#pragma once
+#pragma warning (disable:4996)
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -21,18 +21,19 @@ int main(int argc, char* argv[]) {
 	
 	char word[256];
 	char word2[256];
-	int n, m, directed_graph, i;
+	int n, m, directed_graph;
 	int s, s_new, t, t_new, source, source_new, destination, destination_new;
 	int u, v, edge_id, flag, flag_new;
 	float w;
 
 	int v_scanf, v_fscanf;
 	int r_value;
-	//directed_graph = 1;//NEED TO DELETE AND UNCOMMENT THE BELOW
+	//directed_graph = 0;//NEED TO DELETE AND UNCOMMENT THE BELOW
 	if (argc != 3) {
 		printf("Command Format: %s <graph_file> <direction>\n", argv[0]);
 		exit(1);
 	}
+
 	if (0 == strcmp(argv[2], "directed\0")) {
 		directed_graph = 1;
 	}
@@ -41,7 +42,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	//open network file for reading
-	ifile = fopen(argv[1], "r"); //argv[1],"r" CHANGE TO THIS
+	ifile = fopen(argv[1], "r"); //argv[1]
 	if (!ifile) {
 		printf("ErrorGLX1:cannot open file for reading.\n");
 	}
@@ -49,8 +50,8 @@ int main(int argc, char* argv[]) {
 	//read in n =|V| and m=|E|
 	v_fscanf = fscanf(ifile, "%d%d", &n, &m);
 	if (v_fscanf < 2) {
-		printf("ErrorGLX2: fscanf returns %d. \n", v_fscanf);
-		exit(0); // exit(1)
+		printf("ErrorGLX2: fscanf %d.\n", v_fscanf);
+		exit(0);
 	}
 
 	//allocate memory for adjacency lists
@@ -62,7 +63,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	//read in the edges and construct adjacency list
-	for (i = 1; i <= m; i++) {
+	for (int i = 1; i <= m; i++) {
 		v_fscanf = fscanf(ifile, "%d %d %d %f", &edge_id, &u, &v, &w);
 		if (v_fscanf < 4) {
 			printf("Error: fscanf returns %d.\n", v_fscanf);
